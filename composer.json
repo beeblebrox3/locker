@@ -1,0 +1,27 @@
+{
+    "name": "beeblebrox3/locker",
+    "description": "",
+    "authors": [
+        {
+            "name": "Luís Henrique",
+            "email": "luish.faria@gmail.com",
+            "homepage": "http://www.luque.cc/"
+        },
+        {
+            "name": "Neto Braghetto"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.1.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-0": {
+            "Beeblebrox3\\Locker\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}

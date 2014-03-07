@@ -1,0 +1,7 @@
+nbproject/
+.project
+.settings
+.idea
+*.komodoproject
+vendor/
+sync.sh
