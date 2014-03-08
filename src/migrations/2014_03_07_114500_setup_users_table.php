@@ -18,6 +18,7 @@ class SetupUsersTable extends Migration {
             $table->string('password', 60);
             $table->string('confirmation_code', 40)->nullable();
             $table->dateTime('confirmed')->nullable();
+            $table->tinyInteger('change_password')->default(0);
             $table->softDeletes();
             $table->timestamps();
             $table->engine = 'InnoDB';
