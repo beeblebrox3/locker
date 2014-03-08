@@ -28,7 +28,9 @@ class LockerServiceProvider extends ServiceProvider {
      */
     public function register()
     {
-        //
+        $this->app->bind('locker', function () {
+            return new Locker;
+        });
     }
 
     /**
