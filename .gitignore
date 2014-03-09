@@ -5,3 +5,4 @@ nbproject/
 *.komodoproject
 vendor/
 sync.sh
+.buildpath

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class SetupUsersTable extends Migration {
+class LockerSetupUsersTable extends Migration {
 
 	/**
 	 * Run the migrations.
