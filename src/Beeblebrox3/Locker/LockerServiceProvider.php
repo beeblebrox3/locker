@@ -29,7 +29,8 @@ class LockerServiceProvider extends ServiceProvider {
     public function register()
     {
         $this->app->bind('locker', function () {
-            return new Locker;
+            $modelName = \Config::get('locker::user_model');
+            return new Locker(new $modelName, app());
         });
     }
 

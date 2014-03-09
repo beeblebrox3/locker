@@ -6,15 +6,12 @@ class Locker
 {
 
     private $model = null;
+    private $app = null;
 
-    public function __construct()
+    public function __construct(\Eloquent $model, \Illuminate\Foundation\Application $app)
     {
-        $modelName = \Config::get('locker::user_model');
-        if (!class_exists($modelName)) {
-            throw new \Exception("The model {$modelName} doesn't exist");
-        }
-
-        $this->model = new $modelName;
+        $this->model = $model;
+        $this->app = $app;
     }
 
     /**
@@ -29,8 +26,8 @@ class Locker
             return $validation;
         }
 
-        if (is_null($confirmation)) {
-            $confirmation = \Config::get('locker::signup_confirmation_required');
+        if (is_null($confirmation) || !is_bool($confirmation)) {
+            $confirmation = $this->app->config->get('locker::signup_confirmation_required');
         }
 
         if ($confirmation === true) {
@@ -51,20 +48,27 @@ class Locker
         }
 
         return $newUser;
-
     }
 
     /**
-     * @param string $email
+     * @param Eloquent $user
      * @return boolean
      */
     public function sendConfirmationCode(\Eloquent $user)
     {
         \Mail::send(
             'locker::emails.confirmation',
-            array('user' => $user, 'subject' => \Config::get('locker::subject_email_confirmation')),
+            array(
+                'user' => $user,
+                'subject' => $this->app->config->get('locker::subject_email_confirmation')
+            ),
             function ($message) use ($user) {
-                $message->to($user->email, $user->name)->subject(\Config::get('locker::subject_email_confirmation'));
+                $message->to(
+                    $user->email,
+                    $user->name
+                )->subject(
+                    $this->app->config->get('locker::subject_email_confirmation')
+                );
             }
         );
     }
@@ -117,7 +121,7 @@ class Locker
     }
 
     /**
-     * @param string $email
+     * @param Eloquent $user
      * @return boolean
      */
     public function resetPassword(\Eloquent $user)
@@ -133,9 +137,18 @@ class Locker
 
         \Mail::send(
             'locker::emails.reset',
-            array('user' => $user, 'password' => $newPassword, 'subject' => \Config::get('locker::subject_email_reset')),
+            array(
+                'user' => $user,
+                'password' => $newPassword,
+                'subject' => $this->app->config->get('locker::subject_email_reset')
+            ),
             function ($message) use ($user) {
-                $message->to($user->email, $user->name)->subject(\Config::get('locker::subject_email_confirmation'));
+                $message->to(
+                    $user->email,
+                    $user->name
+                )->subject(
+                    $this->app->config->get('locker::subject_email_confirmation')
+                );
             }
         );
     }
