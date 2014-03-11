@@ -134,8 +134,8 @@
             <table cellpadding="0" cellspacing="0" border="0" align="center">
                 <tr>
                     <td width="600">
-                        <h1>Welcome, {{ $user->name }}!</h1>
-                        <p>Please confirm your account clicking on the link above: <br />
+                        <h1>{{Lang::get('locker::locker.email_confirmation_welcome')}}{{ $user->name }}!</h1>
+                        <p>{{Lang::get('locker::locker.email_confirmation_message')}}<br />
                             {{ URL::to(Config::get('locker::route_confirmation') . '/' . $user->confirmation_code) }}
                         </p>
                     </td>

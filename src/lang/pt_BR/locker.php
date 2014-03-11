@@ -3,20 +3,20 @@
 return array(
     /*
       |===========================================================================
-      | ConfiguraÃ§Ãµes do template de email
+      | Configurações do template de email
       |===========================================================================
      */
-    //Assunto do email de confirmaÃ§Ã£o de conta
+    //Assunto do email de confirmação de conta
     'email_confirmation_subject' => 'Por favor confirme sua conta.',
-    //TÃ­tulo do email de confirmaÃ§Ã£o de conta
-    'email_confirmation_welcome' => 'Bem vindo',
-    //Mensagem do email de confirmaÃ§Ã£o de conta
-    'email_confirmation_message' => 'Por favor confirme sua conta clicando no link a seguir:',
+    //Título do email de confirmação de conta
+    'email_confirmation_welcome' => 'Bem vindo, ',
+    //Mensagem do email de confirmação de conta
+    'email_confirmation_message' => 'Por favor confirme sua conta clicando no link a seguir: ',
     //###
-    //TÃ­tulo do email de reset de senha
-    'email_reset_title' => 'Sua nova senha temporÃ¡ria.',
+    //Título do email de reset de senha
+    'email_reset_title' => 'Sua nova senha temporária.',
     //Mensagem do email de reset de senha
-    'email_reset_message' => 'Por favor use a senha a seguir para o prÃ³ximo login:',
-    //Assunto do email quando o usuÃ¡rio pede um novo password
-    'email_subject_reset' => 'Nova senha temporÃ¡ria.',
+    'email_reset_message' => 'Por favor use a senha a seguir para o próximo login:',
+    //Assunto do email quando o usuário pede um novo password
+    'email_subject_reset' => 'Nova senha temporária.',
 );

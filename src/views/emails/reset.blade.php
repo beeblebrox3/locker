@@ -134,8 +134,8 @@
             <table cellpadding="0" cellspacing="0" border="0" align="center">
                 <tr>
                     <td width="600">
-                        <h1>Thats your new password!</h1>
-                        <p>Please use the above password to login next time: <br />
+                        <h1>{{Lang::get('locker::locker.email_reset_title')}}</h1>
+                        <p>{{Lang::get('locker::locker.email_reset_message')}}<br />
                             <strong>{{ $password }}</strong>
                             {{ URL::to(Config::get('locker::route_login') . '/' . $user->confirmation_code) }}
                         </p>
