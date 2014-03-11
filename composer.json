@@ -7,7 +7,8 @@
             "homepage": "http://www.luque.cc/"
         },
         {
-            "name": "Neto Braghetto"
+            "name": "Neto Braghetto",
+            "email": "Neto.Braghetto@gmail.com"
         }
     ],
     "require": {
