@@ -60,14 +60,14 @@ class Locker
             'locker::emails.confirmation',
             array(
                 'user' => $user,
-                'subject' => $this->app->config->get('locker::email_confirmation_subject')
+                'subject' => \Illuminate\Support\Facades\Lang::get('locker::locker.email_confirmation_subject')
             ),
             function ($message) use ($user) {
                 $message->to(
                     $user->email,
                     $user->name
                 )->subject(
-                    $this->app->config->get('locker::email_confirmation_subject')
+                    \Illuminate\Support\Facades\Lang::get('locker::locker.email_confirmation_subject')
                 );
             }
         );
@@ -140,14 +140,14 @@ class Locker
             array(
                 'user' => $user,
                 'password' => $newPassword,
-                'subject' => $this->app->config->get('locker::email_reset_subject')
+                'subject' => \Illuminate\Support\Facades\Lang::get('locker::locker.email_reset_subject')
             ),
             function ($message) use ($user) {
                 $message->to(
                     $user->email,
                     $user->name
                 )->subject(
-                    $this->app->config->get('locker::email_confirmation_subject')
+                    \Illuminate\Support\Facades\Lang::get('locker::locker.email_confirmation_subject')
                 );
             }
         );
