@@ -57,19 +57,16 @@ class Locker
     public function sendConfirmationCode(\Eloquent $user)
     {
         \Mail::send(
-            'locker::emails.confirmation',
-            array(
-                'user' => $user,
-                'subject' => \Illuminate\Support\Facades\Lang::get('locker::locker.email_confirmation_subject')
-            ),
-            function ($message) use ($user) {
-                $message->to(
-                    $user->email,
-                    $user->name
-                )->subject(
+                'locker::emails.confirmation', array(
+            'user' => $user,
+            'subject' => \Illuminate\Support\Facades\Lang::get('locker::locker.email_confirmation_subject')
+                ), function ($message) use ($user) {
+            $message->to(
+                    $user->email, $user->name
+            )->subject(
                     \Illuminate\Support\Facades\Lang::get('locker::locker.email_confirmation_subject')
-                );
-            }
+            );
+        }
         );
     }
 
@@ -77,7 +74,7 @@ class Locker
      * @param string $code
      * @return boolean
      */
-    public function confirm ($code, $login = false)
+    public function confirm($code, $login = false)
     {
         $user = $this->model->where('confirmation_code', '=', $code)->first();
 
@@ -112,7 +109,7 @@ class Locker
             throw new \Exception("Wrong password", 400);
         }
 
-        if (is_null($user->confirmed)) {
+        if (is_null($user->confirmed) && $this->app->config->get('locker::signup_confirmation_required') === true) {
             throw new \Exception("User not confirmed", 401);
         }
 
@@ -136,26 +133,25 @@ class Locker
         $user->save();
 
         \Mail::send(
-            'locker::emails.reset',
-            array(
-                'user' => $user,
-                'password' => $newPassword,
-                'subject' => \Illuminate\Support\Facades\Lang::get('locker::locker.email_reset_subject')
-            ),
-            function ($message) use ($user) {
-                $message->to(
-                    $user->email,
-                    $user->name
-                )->subject(
+                'locker::emails.reset', array(
+            'user' => $user,
+            'password' => $newPassword,
+            'subject' => \Illuminate\Support\Facades\Lang::get('locker::locker.email_reset_subject')
+                ), function ($message) use ($user) {
+            $message->to(
+                    $user->email, $user->name
+            )->subject(
                     \Illuminate\Support\Facades\Lang::get('locker::locker.email_confirmation_subject')
-                );
-            }
+            );
+        }
         );
     }
 
     public function login(\Eloquent $user)
     {
         \Auth::login($user);
+        $table = 'locker_' . strtolower(get_class($user));
+        \Illuminate\Support\Facades\Session::put($table . '_id', $user->id);
     }
 
     public function logout()
@@ -177,4 +173,5 @@ class Locker
     {
         return \Auth::user();
     }
+
 }
